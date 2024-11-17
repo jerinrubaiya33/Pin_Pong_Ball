@@ -1,0 +1,194 @@
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url('https://t3.ftcdn.net/jpg/02/54/18/88/360_F_254188895_yJrVHWRCPhbq8TFTS2buATp9YTenwFYl.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    backdrop-filter: blur(10px);
+}
+
+/* Panel Styles */
+.panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 1070px;  /* Increased max-width for a larger panel */
+    width: 90%;
+    height: 500px;  /* Increased height to make the panel taller */
+    background: rgba(255, 255, 255, 0.61);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: -1000;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;  
+    height: 80%;
+    border: 10px solid #e9f2ff;
+    border-radius: 20px;
+}
+    
+.panel.reveal {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    z-index: 1000;
+}
+
+/* Panel Header */
+.panel h1 {
+    color: #263238;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-top: 0;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Game Modes - Flex with wrap to allow modes in multiple rows */
+.panel .gameMode {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+}
+
+/* Individual Game Mode Button */
+.panel .gameMode .mode {
+    list-style: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    flex-basis: 30%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 39px; /* Adjust the margin to move the buttons left */
+}
+
+/* Hover and Active State for Buttons */
+.panel .gameMode .mode:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(107, 94, 94, 0.15);
+}
+
+.panel .gameMode .mode.selected {
+    box-shadow: 0 0 0 3px rgb(207, 207, 207);
+}
+
+
+/* Game Mode Colors */
+.panel .gameMode .mode:nth-child(1) {
+    background: linear-gradient(to right, #81c784, #00ff0d);
+}
+
+.panel .gameMode .mode:nth-child(2) {
+    background: linear-gradient(to right, #9575cd, #723bd1);
+}
+
+.panel .gameMode .mode:nth-child(3) {
+    background: linear-gradient(to right, #ebbf7e, #ff9800);
+}
+
+.panel .gameMode .mode:nth-child(4) {
+    background: linear-gradient(to right, #ff8a65, #ff0000);
+}
+
+.panel .gameMode .mode:nth-child(5) {
+    background: linear-gradient(to right, #9575cd, #723bd1);
+}
+
+/* Play Button */
+.play {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 14px 90px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #263238;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.play:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.play:active {
+    transform: scale(1.05);
+}
+
+/* Tooltip for Game Modes */
+.panel span .tooltip {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    visibility: hidden;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 250px;
+    background: #37474f;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    z-index: 2;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.panel span:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .panel {
+        width: 95%;
+    }
+    .gameMode .mode {
+        flex: 1 1 calc(50% - 10px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .panel {
+        padding: 10px;
+    }
+    .gameMode .mode {
+        flex: 1 1 100%;
+    }
+    .play {
+        padding: 10px 30px;
+    }
+}
